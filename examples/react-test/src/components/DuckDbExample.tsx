@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAtom } from 'jotai'
 import { duckdbMachineAtom } from '@jr200/xstate-atoms'
 import yaml from 'js-yaml'
 import { format as prettyFormat } from 'pretty-format'
 import configContent from '/duckdbmachine.yaml.txt?raw'
+import { ProgressBar } from './ProgressBar'
+import { InstantiationProgress } from '@duckdb/duckdb-wasm'
 
 export const DuckDbExample = () => {
   const [state, send] = useAtom(duckdbMachineAtom)
+  const [initProgress, setInitProgress] = useState<InstantiationProgress | null>(null)
 
   const configure = () => {
     try {
@@ -15,7 +18,11 @@ export const DuckDbExample = () => {
         type: 'CONFIGURE',
         config: yamlConfig as any,
       })
-      send({ type: 'CONNECT', dbProgressHandler: null })
+      const dbProgressHandler = (progress: InstantiationProgress) => {
+        setInitProgress(progress)
+      }
+  
+      send({ type: 'CONNECT', dbProgressHandler: dbProgressHandler })
     } catch (error) {
       console.error(error)
     }
@@ -41,19 +48,26 @@ export const DuckDbExample = () => {
                   />
                   <h2 className='text-lg font-semibold text-gray-900'>DuckDB</h2>
                 </div>
-                <button
-                  onClick={configure}
-                  className='px-5 py-2 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2'
-                >
-                  Load
-                </button>
+                <div className='flex items-center gap-4'>
+                  {state.matches('initializing') && initProgress && (
+                    <div className='flex-1 max-w-md'>
+                      <ProgressBar progress={initProgress} />
+                    </div>
+                  )}
+                  <button
+                    onClick={configure}
+                    className='px-5 py-2 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2'
+                  >
+                    Load
+                  </button>
+                </div>
               </div>
             </div>
 
             <hr className="my-6 border-gray-200" />
 
             <div className='bg-gray-50 border border-gray-200 rounded-md p-4 overflow-auto max-h-96'>
-              <pre className='text-black text-sm font-mono leading-relaxed whitespace-pre-wrap'>
+              <pre className='text-xs text-black text-sm font-mono leading-relaxed whitespace-pre-wrap'>
                 {prettyFormat(state, {
                   highlight: true,
                   indent: 2,

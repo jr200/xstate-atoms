@@ -1,17 +1,17 @@
 import React from 'react'
 import { Provider } from 'jotai'
 import { DuckDbExample } from './components/DuckDbExample'
+import { NatsExample } from './components/NatsExample'
+import { CombinedExample } from './components/CombinedExample'
 
 function App() {
   return (
     <Provider>
       <div className='App'>
-        <h1>xstate-atoms Test App</h1>
-        <p>Testing Jotai atoms for NATS, DuckDB, and Time utilities</p>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {/* <NatsExample /> */}
+        <div className="flex flex-row gap-4">
+          <NatsExample />
           <DuckDbExample />
+          <CombinedExample />
         </div>
       </div>
     </Provider>
