@@ -1,25 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { useAtom } from 'jotai'
-import { epochAtom } from '@jr200/xstate-atoms'
+import { type TimeGranularity, useZonedTime } from '@jr200/xstate-atoms'
 
-export const TimeExample = () => {
-  const [epoch, setEpoch] = useAtom(epochAtom)
+export const TemporalGranularityExample = ({ granularity }: { granularity: TimeGranularity }) => {
+  const zdt = useZonedTime(granularity, 'UTC')
   const [localTime, setLocalTime] = useState<string>('')
 
-  // Initialize and update the epoch
   useEffect(() => {
-    const now = Date.now()
-    setEpoch(now)
-
-    // Update every second
-    const interval = setInterval(() => {
-      const currentTime = Date.now()
-      setEpoch(currentTime)
-      setLocalTime(new Date(currentTime).toLocaleString())
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [setEpoch])
+    if (!zdt) return
+    setLocalTime(zdt.toLocaleString())
+  }, [zdt])
 
   return (
     <div className='min-h-screen bg-gray-50 p-8'>
@@ -28,10 +17,10 @@ export const TimeExample = () => {
           {/* State Panel */}
           <div className='bg-white rounded-xl border border-gray-200 p-8 shadow-sm'>
             <div>
-              <div className='flex items-center justify-between mb-6'>
+              <div className='flex items-center justify-between mb-6 gap-4'>
                 <div className='flex items-center gap-3'>
                   <div className='w-3 h-3 rounded-full bg-blue-500 animate-pulse' />
-                  <h2 className='text-lg font-semibold text-gray-900'>Temporal</h2>
+                  <h2 className='text-lg font-semibold text-gray-900'>Temporal ({granularity})</h2>
                 </div>
                 <div className='text-sm text-gray-500'>Live Updates</div>
               </div>
@@ -42,8 +31,8 @@ export const TimeExample = () => {
             <div className='bg-gray-50 border border-gray-200 rounded-md p-4 overflow-auto max-h-96'>
               <div className='text-sm space-y-3'>
                 <div className='flex items-center justify-between gap-4'>
-                  <span className='font-medium text-gray-700'>Epoch value:</span>
-                  <span className='font-mono text-gray-900'>{epoch ?? 'undefined'}</span>
+                  <span className='font-medium text-gray-700'>Raw Epoch value:</span>
+                  <span className='font-mono text-gray-900'>{zdt?.epochMilliseconds ?? 'undefined'}</span>
                 </div>
                 <div className='flex items-center justify-between gap-4'>
                   <span className='font-medium text-gray-700'>Local time:</span>
@@ -51,7 +40,7 @@ export const TimeExample = () => {
                 </div>
                 <div className='flex items-center justify-between gap-4'>
                   <span className='font-medium text-gray-700'>ISO string:</span>
-                  <span className='font-mono text-gray-900'>{epoch ? new Date(epoch).toISOString() : 'undefined'}</span>
+                  <span className='font-mono text-gray-900'>{zdt ? zdt.toString() : 'undefined'}</span>
                 </div>
               </div>
             </div>
