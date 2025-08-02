@@ -10,6 +10,6 @@ export function useEpoch(granularity?: TimeGranularity) {
 }
 
 export function useZonedTime(granularity?: TimeGranularity, timeZone: string = getLocalTimeZone()) {
-  const zonedTime = useAtomValue(timeTzFamily({ granularity, timeZone }))
+  const zonedTime = useAtomValue(timeTzFamily(`${granularity}|${timeZone}`))
   return zonedTime
 }

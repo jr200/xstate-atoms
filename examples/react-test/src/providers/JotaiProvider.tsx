@@ -5,14 +5,15 @@ import 'jotai-devtools/styles.css'
 
 export const store = createStore()
 
-type Props = {
+type JotaiProviderProps = {
+  debug?: boolean
   children: ReactNode
 }
 
-const JotaiProvider = ({ children }: Props) => (
+const JotaiProvider = ({ children, debug = false }: JotaiProviderProps) => (
   <Provider store={store}>
-    {process.env.NODE_ENV === 'development' && <DebugAtoms />}
-    <DevTools store={store} />
+    {debug && process.env.NODE_ENV === 'development' && <DebugAtoms />}
+    {debug && <DevTools store={store} />}
     {children}
   </Provider>
 )

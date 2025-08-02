@@ -44,10 +44,10 @@ export const epochRoundedFamily = atomFamily((granularity?: TimeGranularity) =>
   })
 )
 
-export const timeTzFamily = atomFamily((params: { granularity?: TimeGranularity; timeZone: string }) =>
+export const timeTzFamily = atomFamily((key: string) =>
   atom(get => {
-    const { granularity, timeZone } = params
-    const truncatedEpoch = get(epochRoundedFamily(granularity))
+    const [granularity, timeZone] = key.split('|')
+    const truncatedEpoch = get(epochRoundedFamily(granularity as TimeGranularity | undefined))
     return toZonedDateTime(truncatedEpoch, timeZone)
   })
 )
