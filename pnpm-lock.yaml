@@ -12,11 +12,11 @@ importers:
         specifier: 1.29.1-dev132.0
         version: 1.29.1-dev132.0
       '@jr200/xstate-duckdb':
-        specifier: ^0.2.1
-        version: 0.2.1(react@18.3.1)
+        specifier: file:../xstate-duckdb
+        version: file:../xstate-duckdb(react@18.3.1)
       '@jr200/xstate-nats':
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: file:../xstate-nats
+        version: file:../xstate-nats
       '@js-temporal/polyfill':
         specifier: ^0.5.1
         version: 0.5.1
@@ -633,11 +633,11 @@ packages:
     resolution: {integrity: sha512-DmdYgtezMkh3cpU8/1uyXakv3tJRcmcXxBOcO0tbaozPwpmh4YMsnWrQm9ZmZMfa5ocbxzbFk6O4bDPEc/iAnA==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
-  '@jr200/xstate-duckdb@0.2.1':
-    resolution: {integrity: sha512-kHUFoRqM0Vmgvczvd1epToEOvJYLKLnqbgjvRI4HuyEdUYKVubnvkrZLv1NF/ygMqe/n6Du6454XAsaJ/JvcpQ==}
+  '@jr200/xstate-duckdb@file:../xstate-duckdb':
+    resolution: {directory: ../xstate-duckdb, type: directory}
 
-  '@jr200/xstate-nats@0.3.0':
-    resolution: {integrity: sha512-hYCjGLqnvKhCSVN8bOJym10R9ihyDEW2WjuEvta7lZhnHL90WUTk8qfLjqMJWyNVnb30XE8Bxe3Gdceu9QnT8w==}
+  '@jr200/xstate-nats@file:../xstate-nats':
+    resolution: {directory: ../xstate-nats, type: directory}
 
   '@jridgewell/gen-mapping@0.3.12':
     resolution: {integrity: sha512-OuLGC46TjB5BbN1dH8JULVVZY4WTdkF7tV9Ys6wLL1rubZnCMstOhNHueU5bLCrnRuDhKPDM4g6sw4Bel5Gzqg==}
@@ -1769,6 +1769,7 @@ packages:
     resolution: {integrity: sha512-Quz3MvAwHxVYNXsOByL7xI5EB2WYOeFswqaHIA3qOK3isRWTxiplBEocmmru6XmxDB2L7jDNYtYA4FyimoAFEw==}
     engines: {node: '>=8.17.0'}
     hasBin: true
+    bundledDependencies: []
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -2921,7 +2922,7 @@ snapshots:
     dependencies:
       '@sinclair/typebox': 0.34.38
 
-  '@jr200/xstate-duckdb@0.2.1(react@18.3.1)':
+  '@jr200/xstate-duckdb@file:../xstate-duckdb(react@18.3.1)':
     dependencies:
       '@duckdb/duckdb-wasm': 1.29.1-dev132.0
       apache-arrow: 21.0.0
@@ -2932,7 +2933,7 @@ snapshots:
       - '@75lb/nature'
       - react
 
-  '@jr200/xstate-nats@0.3.0':
+  '@jr200/xstate-nats@file:../xstate-nats':
     dependencies:
       '@nats-io/jetstream': 3.1.0
       '@nats-io/kv': 3.1.0
