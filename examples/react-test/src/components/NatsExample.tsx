@@ -3,7 +3,7 @@ import { useAtom } from 'jotai'
 import { natsMachineAtom } from '@jr200/xstate-atoms'
 import yaml from 'js-yaml'
 import { format as prettyFormat } from 'pretty-format'
-import configContent from '/natsmachine.yaml.txt?raw'
+import configContent from '/nats_basic.yaml.txt?raw'
 
 export const NatsExample = () => {
   const [state, send] = useAtom(natsMachineAtom)
@@ -61,6 +61,9 @@ export const NatsExample = () => {
                 })}
               </pre>
             </div>
+            <div className='text-xs text-gray-500 text-center mt-4'>
+        Last render: {new Date().toLocaleTimeString()}
+      </div>
           </div>
         </div>
       </div>

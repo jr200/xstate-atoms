@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAtom } from 'jotai'
 import { duckdbMachineAtom } from '@jr200/xstate-atoms'
 import yaml from 'js-yaml'
@@ -75,9 +75,13 @@ export const DuckDbExample = () => {
                 })}
               </pre>
             </div>
+            <div className='text-xs text-gray-500 text-center mt-4'>
+        Last render: {new Date().toLocaleTimeString()}
+      </div>
           </div>
         </div>
       </div>
+      
     </div>
   )
 }

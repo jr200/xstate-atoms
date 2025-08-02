@@ -1,20 +1,20 @@
 import React from 'react'
-import { Provider } from 'jotai'
+import JotaiProvider from './providers/JotaiProvider'
 import { DuckDbExample } from './components/DuckDbExample'
 import { NatsExample } from './components/NatsExample'
-import { CombinedExample } from './components/CombinedExample'
+import { TimeExample } from './components/TimeExample'
 
 function App() {
   return (
-    <Provider>
-      <div className='App'>
-        <div className="flex flex-row gap-4">
+    <div className='App'>
+      <div className='flex flex-row gap-4'>
+        <JotaiProvider>
           <NatsExample />
           <DuckDbExample />
-          <CombinedExample />
-        </div>
+          <TimeExample />
+        </JotaiProvider>
       </div>
-    </Provider>
+    </div>
   )
 }
 
