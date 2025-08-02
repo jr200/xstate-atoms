@@ -1,13 +1,12 @@
 import React from 'react'
 import { useAtom } from 'jotai'
-import { duckdbMachineAtom } from '@jr200/xstate-atoms'
+import { natsMachineAtom } from '@jr200/xstate-atoms'
 import yaml from 'js-yaml'
 import { format as prettyFormat } from 'pretty-format'
-import configContent from '/config_yaml.txt?raw'
+import configContent from '/natsmachine.yaml.txt?raw'
 
-export const MachineExample = () => {
-  const [state, send] = useAtom(duckdbMachineAtom)
-  console.log('current', state)
+export const NatsExample = () => {
+  const [state, send] = useAtom(natsMachineAtom)
 
   const configure = () => {
     try {
@@ -16,7 +15,7 @@ export const MachineExample = () => {
         type: 'CONFIGURE',
         config: yamlConfig as any,
       })
-      send({ type: 'CONNECT', dbProgressHandler: null })
+      send({ type: 'CONNECT' })
     } catch (error) {
       console.error(error)
     }
