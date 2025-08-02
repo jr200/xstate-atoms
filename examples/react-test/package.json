@@ -1,0 +1,40 @@
+{
+  "name": "@jr200/xstate-atoms-react-test",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@duckdb/duckdb-wasm": "1.29.1-dev132.0",
+    "@jr200/xstate-atoms": "workspace:*",
+    "@js-temporal/polyfill": "^0.5.1",
+    "@nats-io/jetstream": "^3.1.0",
+    "@nats-io/kv": "^3.1.0",
+    "@nats-io/nats-core": "^3.1.0",
+    "@nats-io/obj": "^3.1.0",
+    "apache-arrow": "^21.0.0",
+    "duckdb-wasm-kit": "^0.1.39",
+    "jotai": "^2.12.5",
+    "jotai-xstate": "^0.6.1",
+    "js-yaml": "^4.1.0",
+    "pretty-format": "^30.0.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "xstate": "^5.20.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3",
+    "vite": "^5.4.1"
+  }
+}
