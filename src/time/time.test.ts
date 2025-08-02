@@ -37,7 +37,7 @@ test('does not truncate with undefined granularity', () => {
 })
 
 test('zoned time uses correct time zone', () => {
-  const zdt = store.get(timeTzFamily({ granularity: 'minute', timeZone: 'Asia/Tokyo' }))
+  const zdt = store.get(timeTzFamily('minute|Asia/Tokyo'))
   expect(zdt?.timeZoneId).toBe('Asia/Tokyo')
   expect(zdt?.epochMilliseconds).toBe(store.get(epochRoundedFamily('minute')))
 })
