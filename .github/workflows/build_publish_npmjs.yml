@@ -7,6 +7,11 @@ on:
 
   workflow_dispatch:
     inputs:
+      checkout-ref:
+        description: "checkout ref"
+        required: false
+        type: string
+        default: "refs/heads/master"
       pnpm-run-test:
         description: "pnpm run test:run"
         required: false

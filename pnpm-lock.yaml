@@ -15,8 +15,8 @@ importers:
         specifier: ^0.2.1
         version: 0.2.1(react@18.3.1)
       '@jr200/xstate-nats':
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.4.1
+        version: 0.4.1
       '@js-temporal/polyfill':
         specifier: ^0.5.1
         version: 0.5.1
@@ -61,7 +61,7 @@ importers:
         specifier: ^3.6.2
         version: 3.6.2
       typescript:
-        specifier: ^5.8.3
+        specifier: ^5.9.2
         version: 5.9.2
       typescript-eslint:
         specifier: ^8.38.0
@@ -636,8 +636,8 @@ packages:
   '@jr200/xstate-duckdb@0.2.1':
     resolution: {integrity: sha512-kHUFoRqM0Vmgvczvd1epToEOvJYLKLnqbgjvRI4HuyEdUYKVubnvkrZLv1NF/ygMqe/n6Du6454XAsaJ/JvcpQ==}
 
-  '@jr200/xstate-nats@0.3.0':
-    resolution: {integrity: sha512-hYCjGLqnvKhCSVN8bOJym10R9ihyDEW2WjuEvta7lZhnHL90WUTk8qfLjqMJWyNVnb30XE8Bxe3Gdceu9QnT8w==}
+  '@jr200/xstate-nats@0.4.1':
+    resolution: {integrity: sha512-0VsPX/FTKx5/3uq/Q/Un1N7mKNvIhGtlpDBYXnB0HAsidgK+ve8iL2ntkDXnGPyJN40rhHpNYwrVwqogPu1thw==}
 
   '@jridgewell/gen-mapping@0.3.12':
     resolution: {integrity: sha512-OuLGC46TjB5BbN1dH8JULVVZY4WTdkF7tV9Ys6wLL1rubZnCMstOhNHueU5bLCrnRuDhKPDM4g6sw4Bel5Gzqg==}
@@ -2932,7 +2932,7 @@ snapshots:
       - '@75lb/nature'
       - react
 
-  '@jr200/xstate-nats@0.3.0':
+  '@jr200/xstate-nats@0.4.1':
     dependencies:
       '@nats-io/jetstream': 3.1.0
       '@nats-io/kv': 3.1.0
