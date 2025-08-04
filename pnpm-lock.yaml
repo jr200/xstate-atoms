@@ -12,11 +12,11 @@ importers:
         specifier: 1.29.1-dev132.0
         version: 1.29.1-dev132.0
       '@jr200/xstate-duckdb':
-        specifier: ^0.2.2
-        version: 0.2.2(react@18.3.1)
+        specifier: workspace:^
+        version: link:../xstate-duckdb
       '@jr200/xstate-nats':
-        specifier: ^0.4.1
-        version: 0.4.1
+        specifier: workspace:^
+        version: link:../xstate-nats
       '@js-temporal/polyfill':
         specifier: ^0.5.1
         version: 0.5.1
@@ -32,6 +32,9 @@ importers:
       '@nats-io/obj':
         specifier: ^3.1.0
         version: 3.1.0
+      '@types/js-yaml':
+        specifier: ^4.0.9
+        version: 4.0.9
       apache-arrow:
         specifier: ^21.0.0
         version: 21.0.0
@@ -68,7 +71,99 @@ importers:
         version: 8.38.0(eslint@9.32.0(jiti@1.21.7))(typescript@5.9.2)
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/node@24.1.0)
+        version: 3.2.4(@types/node@24.2.0)
+
+  ../xstate-duckdb:
+    dependencies:
+      '@duckdb/duckdb-wasm':
+        specifier: 1.29.1-dev132.0
+        version: 1.29.1-dev132.0
+      apache-arrow:
+        specifier: ^21.0.0
+        version: 21.0.0
+      duckdb-wasm-kit:
+        specifier: ^0.1.39
+        version: 0.1.39(@duckdb/duckdb-wasm@1.29.1-dev132.0)(apache-arrow@21.0.0)(react@18.3.1)
+      pako:
+        specifier: ^2.1.0
+        version: 2.1.0
+      xstate:
+        specifier: ^5.20.1
+        version: 5.20.1
+    devDependencies:
+      '@apache-arrow/ts':
+        specifier: ^21.0.0
+        version: 21.0.0
+      '@eslint/js':
+        specifier: ^9.32.0
+        version: 9.32.0
+      '@statelyai/inspect':
+        specifier: ^0.4.0
+        version: 0.4.0(ws@8.18.3)(xstate@5.20.1)
+      '@types/pako':
+        specifier: ^2.0.3
+        version: 2.0.3
+      eslint:
+        specifier: ^9.32.0
+        version: 9.32.0(jiti@1.21.7)
+      globals:
+        specifier: ^16.3.0
+        version: 16.3.0
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.2
+      typescript-eslint:
+        specifier: ^8.38.0
+        version: 8.38.0(eslint@9.32.0(jiti@1.21.7))(typescript@5.9.2)
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.4(@types/node@24.2.0)
+
+  ../xstate-nats:
+    dependencies:
+      '@nats-io/jetstream':
+        specifier: ^3.1.0
+        version: 3.1.0
+      '@nats-io/kv':
+        specifier: ^3.1.0
+        version: 3.1.0
+      '@nats-io/nats-core':
+        specifier: ^3.1.0
+        version: 3.1.0
+      '@nats-io/obj':
+        specifier: ^3.1.0
+        version: 3.1.0
+      xstate:
+        specifier: ^5.20.1
+        version: 5.20.1
+    devDependencies:
+      '@eslint/js':
+        specifier: ^9.32.0
+        version: 9.32.0
+      '@statelyai/inspect':
+        specifier: ^0.4.0
+        version: 0.4.0(ws@8.18.3)(xstate@5.20.1)
+      eslint:
+        specifier: ^9.32.0
+        version: 9.32.0(jiti@1.21.7)
+      globals:
+        specifier: ^16.3.0
+        version: 16.3.0
+      prettier:
+        specifier: ^3.6.2
+        version: 3.6.2
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.2
+      typescript-eslint:
+        specifier: ^8.38.0
+        version: 8.38.0(eslint@9.32.0(jiti@1.21.7))(typescript@5.9.2)
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.4(@types/node@24.2.0)
 
   examples/react-test:
     dependencies:
@@ -132,7 +227,7 @@ importers:
         version: 18.3.7(@types/react@18.3.23)
       '@vitejs/plugin-react':
         specifier: ^4.3.1
-        version: 4.7.0(vite@5.4.19(@types/node@24.1.0))
+        version: 4.7.0(vite@5.4.19(@types/node@24.2.0))
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -147,7 +242,7 @@ importers:
         version: 5.9.2
       vite:
         specifier: ^5.4.1
-        version: 5.4.19(@types/node@24.1.0)
+        version: 5.4.19(@types/node@24.2.0)
 
 packages:
 
@@ -161,6 +256,10 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@apache-arrow/ts@21.0.0':
+    resolution: {integrity: sha512-t833mPaW/YW/Rvd6vz1BV+XjFaT69hbS/Jmfj6aNiifL5oXY16Mw0wvNH7Hlr8G953QB791BOpNehrHjnKgkhQ==}
+    hasBin: true
 
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
@@ -633,12 +732,6 @@ packages:
     resolution: {integrity: sha512-DmdYgtezMkh3cpU8/1uyXakv3tJRcmcXxBOcO0tbaozPwpmh4YMsnWrQm9ZmZMfa5ocbxzbFk6O4bDPEc/iAnA==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
-  '@jr200/xstate-duckdb@0.2.2':
-    resolution: {integrity: sha512-EdMBF4T+gF75NkBFa1mwsOKJxL7yIFGYkfB5qLbhzZcJ8SXyIWSRKrDfiV1mVSX4QtdyeOsMIWaMeMQhEr5Tww==}
-
-  '@jr200/xstate-nats@0.4.1':
-    resolution: {integrity: sha512-0VsPX/FTKx5/3uq/Q/Un1N7mKNvIhGtlpDBYXnB0HAsidgK+ve8iL2ntkDXnGPyJN40rhHpNYwrVwqogPu1thw==}
-
   '@jridgewell/gen-mapping@0.3.12':
     resolution: {integrity: sha512-OuLGC46TjB5BbN1dH8JULVVZY4WTdkF7tV9Ys6wLL1rubZnCMstOhNHueU5bLCrnRuDhKPDM4g6sw4Bel5Gzqg==}
 
@@ -904,6 +997,9 @@ packages:
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
+  '@types/js-yaml@4.0.9':
+    resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
+
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
@@ -913,8 +1009,11 @@ packages:
   '@types/node@20.19.9':
     resolution: {integrity: sha512-cuVNgarYWZqxRJDQHEB58GEONhOK79QVR/qYx4S7kcUObQvUwvFnYxJuuHUKm2aieN9X3yZB4LZsuYNU1Qphsw==}
 
-  '@types/node@24.1.0':
-    resolution: {integrity: sha512-ut5FthK5moxFKH2T1CUOC6ctR67rQRvvHdFLCD2Ql6KXmMuCrjsSsRI9UsLCm9M18BMwClv4pn327UvB7eeO1w==}
+  '@types/node@24.2.0':
+    resolution: {integrity: sha512-3xyG3pMCq3oYCNg7/ZP+E1ooTaGB4cG8JWRsqqOYQdbWNY4zbaV0Ennrd7stjiJEFZCaybcIgpTjJWHRfBSIDw==}
+
+  '@types/pako@2.0.3':
+    resolution: {integrity: sha512-bq0hMV9opAcrmE0Byyo0fY3Ew4tgOevJmQ9grUhpXQhYfyLJ1Kqg3P33JT5fdbT2AjeAjR51zqqVjAL/HMkx7Q==}
 
   '@types/prop-types@15.7.15':
     resolution: {integrity: sha512-F6bEyamV9jKGAFBEmlQnesRPGOQqS2+Uwi0Em15xenOxHaf2hv6L8YCVn3rPdPJOiJfPiCnLIRyvwVaqMY3MIw==}
@@ -1769,6 +1868,7 @@ packages:
     resolution: {integrity: sha512-Quz3MvAwHxVYNXsOByL7xI5EB2WYOeFswqaHIA3qOK3isRWTxiplBEocmmru6XmxDB2L7jDNYtYA4FyimoAFEw==}
     engines: {node: '>=8.17.0'}
     hasBin: true
+    bundledDependencies: []
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -2360,8 +2460,8 @@ packages:
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
-  undici-types@7.8.0:
-    resolution: {integrity: sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw==}
+  undici-types@7.10.0:
+    resolution: {integrity: sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag==}
 
   update-browserslist-db@1.1.3:
     resolution: {integrity: sha512-UxhIZQ+QInVdunkDAaiazvvT/+fXL5Osr0JZlJulepYu6Jd7qJtDZjlur0emRlT71EN3ScPoE7gvsuIKKNavKw==}
@@ -2560,6 +2660,20 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.12
       '@jridgewell/trace-mapping': 0.3.29
+
+  '@apache-arrow/ts@21.0.0':
+    dependencies:
+      '@swc/helpers': 0.5.17
+      '@types/command-line-args': 5.2.3
+      '@types/command-line-usage': 5.0.4
+      '@types/node': 24.2.0
+      command-line-args: 6.0.1
+      command-line-usage: 7.0.3
+      flatbuffers: 25.2.10
+      json-bignum: 0.0.3
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - '@75lb/nature'
 
   '@babel/code-frame@7.27.1':
     dependencies:
@@ -2921,25 +3035,6 @@ snapshots:
     dependencies:
       '@sinclair/typebox': 0.34.38
 
-  '@jr200/xstate-duckdb@0.2.2(react@18.3.1)':
-    dependencies:
-      '@duckdb/duckdb-wasm': 1.29.1-dev132.0
-      apache-arrow: 21.0.0
-      duckdb-wasm-kit: 0.1.39(@duckdb/duckdb-wasm@1.29.1-dev132.0)(apache-arrow@21.0.0)(react@18.3.1)
-      pako: 2.1.0
-      xstate: 5.20.1
-    transitivePeerDependencies:
-      - '@75lb/nature'
-      - react
-
-  '@jr200/xstate-nats@0.4.1':
-    dependencies:
-      '@nats-io/jetstream': 3.1.0
-      '@nats-io/kv': 3.1.0
-      '@nats-io/nats-core': 3.1.0
-      '@nats-io/obj': 3.1.0
-      xstate: 5.20.1
-
   '@jridgewell/gen-mapping@0.3.12':
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.4
@@ -3218,6 +3313,8 @@ snapshots:
 
   '@types/estree@1.0.8': {}
 
+  '@types/js-yaml@4.0.9': {}
+
   '@types/json-schema@7.0.15': {}
 
   '@types/lodash@4.17.20': {}
@@ -3226,9 +3323,11 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
-  '@types/node@24.1.0':
+  '@types/node@24.2.0':
     dependencies:
-      undici-types: 7.8.0
+      undici-types: 7.10.0
+
+  '@types/pako@2.0.3': {}
 
   '@types/prop-types@15.7.15': {}
 
@@ -3334,7 +3433,7 @@ snapshots:
       '@typescript-eslint/types': 8.38.0
       eslint-visitor-keys: 4.2.1
 
-  '@vitejs/plugin-react@4.7.0(vite@5.4.19(@types/node@24.1.0))':
+  '@vitejs/plugin-react@4.7.0(vite@5.4.19(@types/node@24.2.0))':
     dependencies:
       '@babel/core': 7.28.0
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.0)
@@ -3342,7 +3441,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.27
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
-      vite: 5.4.19(@types/node@24.1.0)
+      vite: 5.4.19(@types/node@24.2.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -3361,13 +3460,13 @@ snapshots:
       chai: 5.2.1
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.2.4(vite@5.4.19(@types/node@24.1.0))':
+  '@vitest/mocker@3.2.4(vite@5.4.19(@types/node@24.2.0))':
     dependencies:
       '@vitest/spy': 3.2.4
       estree-walker: 3.0.3
       magic-string: 0.30.17
     optionalDependencies:
-      vite: 5.4.19(@types/node@24.1.0)
+      vite: 5.4.19(@types/node@24.2.0)
 
   '@vitest/pretty-format@2.0.5':
     dependencies:
@@ -3469,7 +3568,7 @@ snapshots:
       '@swc/helpers': 0.5.17
       '@types/command-line-args': 5.2.3
       '@types/command-line-usage': 5.0.4
-      '@types/node': 24.1.0
+      '@types/node': 24.2.0
       command-line-args: 6.0.1
       command-line-usage: 7.0.3
       flatbuffers: 25.2.10
@@ -4730,7 +4829,7 @@ snapshots:
 
   undici-types@6.21.0: {}
 
-  undici-types@7.8.0: {}
+  undici-types@7.10.0: {}
 
   update-browserslist-db@1.1.3(browserslist@4.25.1):
     dependencies:
@@ -4788,13 +4887,13 @@ snapshots:
 
   uuid@9.0.1: {}
 
-  vite-node@3.2.4(@types/node@24.1.0):
+  vite-node@3.2.4(@types/node@24.2.0):
     dependencies:
       cac: 6.7.14
       debug: 4.4.1
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 5.4.19(@types/node@24.1.0)
+      vite: 5.4.19(@types/node@24.2.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -4806,20 +4905,20 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.4.19(@types/node@24.1.0):
+  vite@5.4.19(@types/node@24.2.0):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.5.6
       rollup: 4.46.2
     optionalDependencies:
-      '@types/node': 24.1.0
+      '@types/node': 24.2.0
       fsevents: 2.3.3
 
-  vitest@3.2.4(@types/node@24.1.0):
+  vitest@3.2.4(@types/node@24.2.0):
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
-      '@vitest/mocker': 3.2.4(vite@5.4.19(@types/node@24.1.0))
+      '@vitest/mocker': 3.2.4(vite@5.4.19(@types/node@24.2.0))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4
@@ -4837,11 +4936,11 @@ snapshots:
       tinyglobby: 0.2.14
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
-      vite: 5.4.19(@types/node@24.1.0)
-      vite-node: 3.2.4(@types/node@24.1.0)
+      vite: 5.4.19(@types/node@24.2.0)
+      vite-node: 3.2.4(@types/node@24.2.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 24.1.0
+      '@types/node': 24.2.0
     transitivePeerDependencies:
       - less
       - lightningcss

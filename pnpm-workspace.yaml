@@ -1,6 +1,9 @@
 packages:
   - "."
   - "examples/*"
+  - "../xstate-duckdb"
+  - "../xstate-nats"
+
 
 ignoredBuiltDependencies:
   - esbuild
