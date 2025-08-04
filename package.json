@@ -36,12 +36,12 @@
   },
   "dependencies": {
     "@js-temporal/polyfill": "^0.5.1",
-    "@jr200/xstate-duckdb": "^0.2.1",
-    "@jr200/xstate-nats": "^0.4.1"
+    "@jr200/xstate-duckdb": "file:../xstate-duckdb",
+    "@jr200/xstate-nats": "file:../xstate-nats",
   },
   "@comment-dependencies": {
-    "@jr200/xstate-duckdb": "file:../xstate-duckdb",
-    "@jr200/xstate-nats": "file:../xstate-nats"
+    "@jr200/xstate-duckdb": "^0.2.2",
+    "@jr200/xstate-nats": "^0.4.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",

@@ -12,8 +12,8 @@ importers:
         specifier: 1.29.1-dev132.0
         version: 1.29.1-dev132.0
       '@jr200/xstate-duckdb':
-        specifier: ^0.2.1
-        version: 0.2.1(react@18.3.1)
+        specifier: ^0.2.2
+        version: 0.2.2(react@18.3.1)
       '@jr200/xstate-nats':
         specifier: ^0.4.1
         version: 0.4.1
@@ -633,8 +633,8 @@ packages:
     resolution: {integrity: sha512-DmdYgtezMkh3cpU8/1uyXakv3tJRcmcXxBOcO0tbaozPwpmh4YMsnWrQm9ZmZMfa5ocbxzbFk6O4bDPEc/iAnA==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
-  '@jr200/xstate-duckdb@0.2.1':
-    resolution: {integrity: sha512-kHUFoRqM0Vmgvczvd1epToEOvJYLKLnqbgjvRI4HuyEdUYKVubnvkrZLv1NF/ygMqe/n6Du6454XAsaJ/JvcpQ==}
+  '@jr200/xstate-duckdb@0.2.2':
+    resolution: {integrity: sha512-EdMBF4T+gF75NkBFa1mwsOKJxL7yIFGYkfB5qLbhzZcJ8SXyIWSRKrDfiV1mVSX4QtdyeOsMIWaMeMQhEr5Tww==}
 
   '@jr200/xstate-nats@0.4.1':
     resolution: {integrity: sha512-0VsPX/FTKx5/3uq/Q/Un1N7mKNvIhGtlpDBYXnB0HAsidgK+ve8iL2ntkDXnGPyJN40rhHpNYwrVwqogPu1thw==}
@@ -2921,7 +2921,7 @@ snapshots:
     dependencies:
       '@sinclair/typebox': 0.34.38
 
-  '@jr200/xstate-duckdb@0.2.1(react@18.3.1)':
+  '@jr200/xstate-duckdb@0.2.2(react@18.3.1)':
     dependencies:
       '@duckdb/duckdb-wasm': 1.29.1-dev132.0
       apache-arrow: 21.0.0

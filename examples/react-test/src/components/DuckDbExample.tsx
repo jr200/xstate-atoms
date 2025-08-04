@@ -67,7 +67,7 @@ export const DuckDbExample = () => {
             <hr className='my-6 border-gray-200' />
 
             <div className='bg-gray-50 border border-gray-200 rounded-md p-4 overflow-auto max-h-96'>
-              <pre className='text-xs text-black text-sm font-mono leading-relaxed whitespace-pre-wrap'>
+              <pre className='text-xs text-black font-mono leading-relaxed whitespace-pre-wrap'>
                 {prettyFormat(state, {
                   highlight: true,
                   indent: 2,
