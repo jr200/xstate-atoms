@@ -1,5 +1,5 @@
 import { getDefaultStore } from 'jotai'
-import { epochAtom, timeConfigAtom, epochRoundedFamily, timeTzFamily } from './time'
+import { epochAtom, timeConfigAtom, epochRoundedFamily, timeTzFamily } from './atoms'
 import { Temporal } from '@js-temporal/polyfill'
 import { expect, test } from 'vitest'
 import { TimeGranularity } from './types'

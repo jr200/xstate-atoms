@@ -1,8 +1,7 @@
 import React from 'react'
 import { useAtom } from 'jotai'
-import { natsMachineAtom } from '@jr200/xstate-atoms'
+import { natsMachineAtom, prettyPrintXState } from '@jr200/xstate-atoms'
 import yaml from 'js-yaml'
-import { format as prettyFormat } from 'pretty-format'
 import configContent from '/nats_basic.yaml.txt?raw'
 
 export const NatsExample = () => {
@@ -54,11 +53,7 @@ export const NatsExample = () => {
 
             <div className='bg-gray-50 border border-gray-200 rounded-md p-4 overflow-auto max-h-96'>
               <pre className='text-xs text-black text-sm font-mono leading-relaxed whitespace-pre-wrap'>
-                {prettyFormat(state, {
-                  highlight: true,
-                  indent: 2,
-                  maxDepth: 10,
-                })}
+                {prettyPrintXState(state)}
               </pre>
             </div>
             <div className='text-xs text-gray-500 text-center mt-4'>Last render: {new Date().toLocaleTimeString()}</div>
