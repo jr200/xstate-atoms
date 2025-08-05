@@ -1,6 +1,6 @@
 // hooks.ts
 import { useAtomValue } from 'jotai'
-import { epochRoundedFamily, timeTzFamily } from './time'
+import { epochRoundedFamily, timeTzFamily } from './atoms'
 import { TimeGranularity } from './types'
 import { getLocalTimeZone } from './utils'
 

@@ -4,7 +4,7 @@ interface PrettyPrintOptions {
   showOmitDetail?: boolean
 }
 
-export const prettyPrintDefault = (
+export const prettyPrintXState = (
   value: any,
   omitKeys: string[] = [],
   omitTypes: string[] = [],

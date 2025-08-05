@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useAtom, useAtomValue } from 'jotai'
-import { duckdbMachineAtom, prettyPrintDefault, snapshotAtom } from '@jr200/xstate-atoms'
+import { duckdbMachineAtom, prettyPrintXState, duckdbSnapshotAtom } from '@jr200/xstate-atoms'
 import yaml from 'js-yaml'
 import configContent from '/duckdbmachine.yaml.txt?raw'
 import { ProgressBar } from './ProgressBar'
@@ -8,7 +8,7 @@ import { InstantiationProgress } from '@duckdb/duckdb-wasm'
 
 export const DuckDbExample = () => {
   const [, send] = useAtom(duckdbMachineAtom)
-  const state = useAtomValue(snapshotAtom)
+  const state = useAtomValue(duckdbSnapshotAtom)
   const [initProgress, setInitProgress] = useState<InstantiationProgress | null>(null)
 
   const configure = () => {
@@ -68,7 +68,7 @@ export const DuckDbExample = () => {
 
             <div className='bg-gray-50 border border-gray-200 rounded-md p-4 overflow-auto max-h-96'>
               <pre className='text-xs text-black font-mono leading-relaxed whitespace-pre-wrap'>
-                {prettyPrintDefault(state)}
+                {prettyPrintXState(state)}
               </pre>
             </div>
             <div className='text-xs text-gray-500 text-center mt-4'>Last render: {new Date().toLocaleTimeString()}</div>

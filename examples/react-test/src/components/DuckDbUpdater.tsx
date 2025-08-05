@@ -10,15 +10,16 @@ export const DuckDbUpdater = () => {
     duckdbSend({
       type: 'CATALOG.LOAD_TABLE',
       data: {
-        tableSpecName: "test_table",
+        tableSpecName: 'test_table',
         tablePayload: payloadContent,
         payloadType: 'b64ipc',
         payloadCompression: 'zlib',
         callback: (tableInstanceName: string, error?: string) => {
-          console.log("duckdb updater callback", tableInstanceName, error)
+          console.log('duckdb updater callback', tableInstanceName, error)
         },
       },
-    })  }
+    })
+  }
 
   return (
     <>

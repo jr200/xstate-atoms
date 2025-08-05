@@ -1,25 +1,22 @@
 import React, { useState } from 'react'
 import { useAtom, useAtomValue } from 'jotai'
-import { prettyPrintDefault, getUserChildrenAtom, snapshotAtom, duckdbMachineAtom } from '@jr200/xstate-atoms'
+import { prettyPrintXState, dbCatalogSnapshotAtom, duckdbSnapshotAtom, duckdbMachineAtom } from '@jr200/xstate-atoms'
 
 export const DuckDbCatalog = () => {
-
-  const [state, send] = useAtom(duckdbMachineAtom)
-  const snapshot = useAtomValue(snapshotAtom)
-  const getUserChildren = useAtomValue(getUserChildrenAtom)
+  const snapshot = useAtomValue(duckdbSnapshotAtom)
+  const dbCatalogSnapshot = useAtomValue(dbCatalogSnapshotAtom)
 
   const [renderKey, setRenderKey] = useState(0)
 
   console.log({
     snapshot,
     getUserDirectSnapshot: snapshot.children.dbCatalog?.getSnapshot(),
-    getUserChildren,
+    dbCatalogState: dbCatalogSnapshot,
   })
 
   const handleRerender = () => {
     setRenderKey(prev => prev + 1)
   }
-  
 
   return (
     <div className='min-h-screen bg-gray-50 p-8'>
@@ -45,7 +42,7 @@ export const DuckDbCatalog = () => {
             <hr className='my-6 border-gray-200' />
 
             <div className='bg-gray-50 border border-gray-200 rounded-md p-4 overflow-auto max-h-96'>
-              <pre className='text-xs'>{prettyPrintDefault(getUserChildren)}</pre>
+              <pre className='text-xs'>{prettyPrintXState(dbCatalogSnapshot)}</pre>
             </div>
             <div className='text-xs text-gray-500 text-center mt-4'>
               Last render: {new Date().toLocaleTimeString()} (key: {renderKey})
