@@ -11,8 +11,9 @@ export const prettyPrintAtom = (
   showOmitDetail: boolean = false
 ) => {
   const defaultOmitKeys = [
-    '.context.kvm',
+    '.context.cachedKvm',
     '.context.connection',
+    '.context.cachedConnection',
     '.context.duckDbHandle',
     '.machine',
     '_.*',
