@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useAtom, useAtomValue } from 'jotai'
 import { duckdbMachineAtom, prettyPrintXState, duckdbSnapshotAtom } from '@jr200/xstate-atoms'
 import yaml from 'js-yaml'
 import configContent from '/duckdbmachine.yaml.txt?raw'
 import { ProgressBar } from './ProgressBar'
 import { InstantiationProgress } from '@duckdb/duckdb-wasm'
+import { initProgressAtom } from './atoms'
 
 export const DuckDbExample = () => {
   const [, send] = useAtom(duckdbMachineAtom)
   const state = useAtomValue(duckdbSnapshotAtom)
-  const [initProgress, setInitProgress] = useState<InstantiationProgress | null>(null)
+  const [initProgress, setInitProgress] = useAtom(initProgressAtom)
 
   const configure = () => {
     try {
@@ -29,7 +30,7 @@ export const DuckDbExample = () => {
   }
 
   return (
-    <div className='min-h-screen bg-gray-50 p-8'>
+    <div className='h-full bg-gray-50 p-8'>
       <div className='max-w-3xl mx-auto'>
         <div className='grid grid-cols-1 gap-8'>
           {/* State Panel */}
@@ -66,7 +67,7 @@ export const DuckDbExample = () => {
 
             <hr className='my-6 border-gray-200' />
 
-            <div className='bg-gray-50 border border-gray-200 rounded-md p-4 overflow-auto max-h-96'>
+            <div className='bg-gray-50 border border-gray-200 rounded-md p-4 overflow-auto '>
               <pre className='text-xs text-black font-mono leading-relaxed whitespace-pre-wrap'>
                 {prettyPrintXState(state)}
               </pre>

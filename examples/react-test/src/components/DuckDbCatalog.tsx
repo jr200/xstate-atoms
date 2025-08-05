@@ -1,25 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useAtom, useAtomValue } from 'jotai'
-import { prettyPrintXState, dbCatalogSnapshotAtom, duckdbSnapshotAtom, duckdbMachineAtom } from '@jr200/xstate-atoms'
+import { prettyPrintXState, dbCatalogSnapshotAtom } from '@jr200/xstate-atoms'
+import { renderKeyAtom } from './atoms'
 
 export const DuckDbCatalog = () => {
-  const snapshot = useAtomValue(duckdbSnapshotAtom)
   const dbCatalogSnapshot = useAtomValue(dbCatalogSnapshotAtom)
-
-  const [renderKey, setRenderKey] = useState(0)
-
-  console.log({
-    snapshot,
-    getUserDirectSnapshot: snapshot.children.dbCatalog?.getSnapshot(),
-    dbCatalogState: dbCatalogSnapshot,
-  })
+  const [renderKey, setRenderKey] = useAtom(renderKeyAtom)
 
   const handleRerender = () => {
     setRenderKey(prev => prev + 1)
   }
 
   return (
-    <div className='min-h-screen bg-gray-50 p-8'>
+    <div className=' bg-gray-50 p-8'>
       <div className='min-w-96 mx-auto'>
         <div className='grid grid-cols-1 gap-8'>
           {/* State Panel */}
