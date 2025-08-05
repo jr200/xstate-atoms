@@ -1,12 +1,12 @@
 import React from 'react'
-import { useAtom } from 'jotai'
+import { useSetAtom } from 'jotai'
 import { duckdbMachineAtom } from '@jr200/xstate-atoms'
 import payloadContent from '/payload.b64ipc_zlib.txt?raw'
 import { callbackTextAtom } from './atoms'
 
 export const DuckDbUpdater = () => {
-  const [, duckdbSend] = useAtom(duckdbMachineAtom)
-  const [, setCallbackText] = useAtom(callbackTextAtom)
+  const duckdbSend = useSetAtom(duckdbMachineAtom)
+  const setCallbackText = useSetAtom(callbackTextAtom)
 
   const handleUpdate = () => {
     const tableSpecName = 'test_table'
