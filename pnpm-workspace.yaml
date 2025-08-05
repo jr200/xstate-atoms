@@ -7,3 +7,7 @@ packages:
 
 ignoredBuiltDependencies:
   - esbuild
+
+overrides:
+  "@jr200/xstate-duckdb": "workspace:*"
+  "@jr200/xstate-nats": "workspace:*"

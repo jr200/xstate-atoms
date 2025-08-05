@@ -4,7 +4,7 @@ interface PrettyPrintOptions {
   showOmitDetail?: boolean
 }
 
-export const prettyPrintAtom = (
+export const prettyPrintXState = (
   value: any,
   omitKeys: string[] = [],
   omitTypes: string[] = [],
@@ -16,6 +16,10 @@ export const prettyPrintAtom = (
     '.context.cachedConnection',
     '.context.duckDbHandle',
     '.machine',
+    '.system',
+    '.src',
+    '.logic',
+    '.options',
     '_.*',
     '.children',
     '.auth.sentinelB64',

@@ -39,6 +39,7 @@ jobs:
     needs: configure
     uses: jr200/github-action-templates/.github/workflows/build_publish_npmjs.yml@main
     with:
+      checkout-ref: ${{ fromJson(needs.configure.outputs.context).checkout-ref }}
       pnpm-run-test: ${{ fromJson(needs.configure.outputs.context).pnpm-run-test }}
       pnpm-publish-args: ${{ fromJson(needs.configure.outputs.context).pnpm-publish-args }}
       node-version: ${{ fromJson(needs.configure.outputs.context).node-version }}

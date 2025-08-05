@@ -12,7 +12,7 @@ export const TemporalExample = () => {
   }, [epoch])
 
   return (
-    <div className='min-h-screen bg-gray-50 p-8'>
+    <div className=' bg-gray-50 p-8'>
       <div className='max-w-3xl mx-auto'>
         <div className='grid grid-cols-1 gap-8'>
           {/* State Panel */}
@@ -29,7 +29,7 @@ export const TemporalExample = () => {
 
             <hr className='my-6 border-gray-200' />
 
-            <div className='bg-gray-50 border border-gray-200 rounded-md p-4 overflow-auto max-h-96'>
+            <div className='bg-gray-50 border border-gray-200 rounded-md p-4 overflow-auto'>
               <div className='text-sm space-y-3'>
                 <div className='flex items-center justify-between gap-4'>
                   <span className='font-medium text-gray-700'>Raw Epoch value:</span>
