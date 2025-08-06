@@ -8,6 +8,8 @@ import { TemporalGranularityExample } from './components/TemporalGranularityExam
 import { DuckDbCatalog } from './components/DuckDbCatalog'
 import { DuckDbUpdater } from './components/DuckDbUpdater'
 import { DuckDbStatus } from './components/DuckDbStatus'
+import { DuckDbCatalogState } from './components/DuckDbCatalogState'
+import { loadedVersionsAtom, tableDefinitionsAtom } from './components/atoms'
 
 function App() {
   return (
@@ -16,10 +18,12 @@ function App() {
         <JotaiProvider>
           <div className='flex flex-col gap-4 h-full'>
             <DuckDbCatalog />
-            <DuckDbUpdater />
+            <DuckDbCatalogState label='TableDefinition' someAtom={tableDefinitionsAtom} />
+            <DuckDbCatalogState label='LoadedVersions' someAtom={loadedVersionsAtom} />
           </div>
           <div className='flex flex-col gap-4 h-full'>
             <DuckDbExample />
+            <DuckDbUpdater />
             <DuckDbStatus />
           </div>
           <div className='flex flex-col gap-4 h-full'>
