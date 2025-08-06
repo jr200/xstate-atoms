@@ -1,16 +1,22 @@
-import { atomWithMachine } from 'jotai-xstate'
+import { atomWithActor, atomWithActorSnapshot } from 'jotai-xstate'
 import { natsMachine } from '@jr200/xstate-nats'
-import { atom } from 'jotai'
+import { AnyActor } from 'xstate'
 
-// single atom using the nats machine
-export const natsMachineAtom = atomWithMachine(() => natsMachine as any)
-natsMachineAtom.debugLabel = 'js.natsMachineAtom'
+export const natsActorAtom = atomWithActor(natsMachine)
 
-export const natsConnectionHandleAtom = atom(get => get(natsMachineAtom).context.connection)
-natsConnectionHandleAtom.debugLabel = 'js.natsConnectionHandleAtom'
+export const natsSnapshotAtom = atomWithActorSnapshot(get => {
+  const snapshot = get(natsActorAtom)
+  return snapshot
+})
 
-export const natsSubjectMachineAtom = atom(get => get(natsMachineAtom).children.subject)
-natsSubjectMachineAtom.debugLabel = 'js.natsSubjectMachineAtom'
+export const natsSubjectSnapshotAtom = atomWithActorSnapshot(get => {
+  const snapshot = get(natsSnapshotAtom)
+  const child = snapshot.children.subject
+  return child as AnyActor
+})
 
-export const natsKvMachineAtom = atom(get => get(natsMachineAtom).children.kv)
-natsKvMachineAtom.debugLabel = 'js.natsKvMachineAtom'
+export const natsKvSnapshotAtom = atomWithActorSnapshot(get => {
+  const snapshot = get(natsSnapshotAtom)
+  const child = snapshot.children.kv
+  return child as AnyActor
+})

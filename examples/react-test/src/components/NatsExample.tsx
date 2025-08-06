@@ -1,20 +1,21 @@
 import React from 'react'
-import { useAtom } from 'jotai'
-import { natsMachineAtom, prettyPrintXState } from '@jr200/xstate-atoms'
+import { useAtomValue } from 'jotai'
+import { natsActorAtom, natsSnapshotAtom, prettyPrintXState } from '@jr200/xstate-atoms'
 import yaml from 'js-yaml'
 import configContent from '/nats_basic.yaml.txt?raw'
 
 export const NatsExample = () => {
-  const [state, send] = useAtom(natsMachineAtom)
+  const natsActor = useAtomValue(natsActorAtom)
+  const natsState = useAtomValue(natsSnapshotAtom)
 
   const configure = () => {
     try {
       const yamlConfig = yaml.load(configContent)
-      send({
+      natsActor.send({
         type: 'CONFIGURE',
         config: yamlConfig as any,
       })
-      send({ type: 'CONNECT' })
+      natsActor.send({ type: 'CONNECT' })
     } catch (error) {
       console.error(error)
     }
@@ -31,9 +32,9 @@ export const NatsExample = () => {
                 <div className='flex items-center gap-3'>
                   <div
                     className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                      state.matches('connected')
+                      natsState.matches('connected')
                         ? 'bg-green-500'
-                        : state.matches('connecting')
+                        : natsState.matches('connecting')
                           ? 'bg-yellow-400'
                           : 'bg-red-400'
                     }`}
@@ -53,7 +54,7 @@ export const NatsExample = () => {
 
             <div className='bg-gray-50 border border-gray-200 rounded-md p-4 overflow-auto max-h-96'>
               <pre className='text-xs text-black text-sm font-mono leading-relaxed whitespace-pre-wrap'>
-                {prettyPrintXState(state)}
+                {prettyPrintXState(natsState)}
               </pre>
             </div>
             <div className='text-xs text-gray-500 text-center mt-4'>Last render: {new Date().toLocaleTimeString()}</div>
