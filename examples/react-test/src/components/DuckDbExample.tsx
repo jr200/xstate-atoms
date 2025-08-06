@@ -59,7 +59,7 @@ export const DuckDbExample = () => {
                     onClick={configure}
                     className='px-5 py-2 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2'
                   >
-                    Load
+                    Connect
                   </button>
                 </div>
               </div>

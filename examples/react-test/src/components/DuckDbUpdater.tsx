@@ -29,7 +29,7 @@ export const DuckDbUpdater = () => {
   }
 
   return (
-    <div className='min-h-screen bg-gray-50 p-8'>
+    <div className='bg-gray-50 p-8'>
       <div className='w-96 mx-auto'>
         <div className='grid grid-cols-1 gap-8'>
           {/* State Panel */}

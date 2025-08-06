@@ -1,6 +1,6 @@
 {
   "name": "@jr200/xstate-atoms",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "author": "jr200",
   "description": "Various XState Jotai Atoms...",
   "repository": "https://github.com/jr200/xstate-atoms",
