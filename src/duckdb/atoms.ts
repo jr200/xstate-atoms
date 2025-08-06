@@ -13,8 +13,8 @@ export const duckdbSnapshotAtom = atomWithActorSnapshot(get => {
 })
 duckdbSnapshotAtom.debugLabel = 'xa.duckdbSnapshotAtom'
 
-export const dbCatalogSnapshotAtom = atomWithActorSnapshot(get => {
+export const duckdbCatalogSnapshotAtom = atomWithActorSnapshot(get => {
   const snapshot = get(duckdbSnapshotAtom)
   return snapshot.children.dbCatalog as AnyActor
 })
-dbCatalogSnapshotAtom.debugLabel = 'xa.dbCatalogSnapshotAtom'
+duckdbCatalogSnapshotAtom.debugLabel = 'xa.duckdbCatalogSnapshotAtom'

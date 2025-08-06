@@ -1,6 +1,6 @@
 import { atom } from 'jotai'
 import { InstantiationProgress } from '@duckdb/duckdb-wasm'
-import { dbCatalogSnapshotAtom } from '@jr200/xstate-atoms'
+import { duckdbCatalogSnapshotAtom } from '@jr200/xstate-atoms'
 
 export const renderKeyAtom = atom(0)
 export const callbackTextAtom = atom<string>(
@@ -9,5 +9,5 @@ export const callbackTextAtom = atom<string>(
 export const initProgressAtom = atom<InstantiationProgress | null>(null)
 
 // some states that we want to watch in the XState machine contexts
-export const tableDefinitionsAtom = atom(get => get(dbCatalogSnapshotAtom).context.tableDefinitions)
-export const loadedVersionsAtom = atom(get => get(dbCatalogSnapshotAtom).context.loadedVersions)
+export const tableDefinitionsAtom = atom(get => get(duckdbCatalogSnapshotAtom).context.tableDefinitions)
+export const loadedVersionsAtom = atom(get => get(duckdbCatalogSnapshotAtom).context.loadedVersions)

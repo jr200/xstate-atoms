@@ -1,10 +1,10 @@
 import React from 'react'
 import { useAtom, useAtomValue } from 'jotai'
-import { prettyPrintXState, dbCatalogSnapshotAtom } from '@jr200/xstate-atoms'
+import { prettyPrintXState, duckdbCatalogSnapshotAtom } from '@jr200/xstate-atoms'
 import { renderKeyAtom } from './atoms'
 
 export const DuckDbCatalog = () => {
-  const dbCatalogSnapshot = useAtomValue(dbCatalogSnapshotAtom)
+  const dbCatalogSnapshot = useAtomValue(duckdbCatalogSnapshotAtom)
   const [renderKey, setRenderKey] = useAtom(renderKeyAtom)
 
   const handleRerender = () => {
