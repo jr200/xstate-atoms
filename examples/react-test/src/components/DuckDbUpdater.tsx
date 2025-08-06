@@ -1,11 +1,11 @@
 import React from 'react'
 import { useSetAtom } from 'jotai'
-import { duckdbMachineAtom } from '@jr200/xstate-atoms'
+import { duckdbActorAtom } from '@jr200/xstate-atoms'
 import payloadContent from '/payload.b64ipc_zlib.txt?raw'
 import { callbackTextAtom } from './atoms'
 
 export const DuckDbUpdater = () => {
-  const duckdbSend = useSetAtom(duckdbMachineAtom)
+  const duckdbSend = useSetAtom(duckdbActorAtom)
   const setCallbackText = useSetAtom(callbackTextAtom)
 
   const handleUpdate = () => {

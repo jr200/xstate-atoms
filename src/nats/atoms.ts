@@ -2,6 +2,8 @@ import { atomWithActor, atomWithActorSnapshot } from 'jotai-xstate'
 import { natsMachine } from '@jr200/xstate-nats'
 import { AnyActor } from 'xstate'
 
+// this pattern/workaround for accessing child states is from:
+// https://github.com/jotaijs/jotai-xstate/issues/11
 export const natsActorAtom = atomWithActor(natsMachine)
 
 export const natsSnapshotAtom = atomWithActorSnapshot(get => {

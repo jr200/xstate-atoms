@@ -163,7 +163,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
       typescript-eslint:
-        specifier: ^8.38.0
+        specifier: ^8.39.0
         version: 8.39.0(eslint@9.32.0(jiti@1.21.7))(typescript@5.9.2)
       vitest:
         specifier: ^3.2.4

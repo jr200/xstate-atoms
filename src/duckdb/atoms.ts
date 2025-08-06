@@ -4,9 +4,9 @@ import { AnyActor } from 'xstate'
 
 // this pattern/workaround for accessing child states is from:
 // https://github.com/jotaijs/jotai-xstate/issues/11
-export const duckdbMachineAtom = atomWithActor(duckdbMachine)
+export const duckdbActorAtom = atomWithActor(duckdbMachine)
 export const duckdbSnapshotAtom = atomWithActorSnapshot(get => {
-  const snapshot = get(duckdbMachineAtom)
+  const snapshot = get(duckdbActorAtom)
   return snapshot
 })
 

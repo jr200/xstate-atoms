@@ -1,6 +1,6 @@
 import React from 'react'
-import { useAtom, useAtomValue } from 'jotai'
-import { duckdbMachineAtom, prettyPrintXState, duckdbSnapshotAtom } from '@jr200/xstate-atoms'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
+import { duckdbActorAtom, prettyPrintXState, duckdbSnapshotAtom } from '@jr200/xstate-atoms'
 import yaml from 'js-yaml'
 import configContent from '/duckdbmachine.yaml.txt?raw'
 import { ProgressBar } from './ProgressBar'
@@ -8,14 +8,14 @@ import { InstantiationProgress } from '@duckdb/duckdb-wasm'
 import { initProgressAtom } from './atoms'
 
 export const DuckDbExample = () => {
-  const [, send] = useAtom(duckdbMachineAtom)
+  const duckdbSend = useSetAtom(duckdbActorAtom)
   const state = useAtomValue(duckdbSnapshotAtom)
   const [initProgress, setInitProgress] = useAtom(initProgressAtom)
 
   const configure = () => {
     try {
       const yamlConfig = yaml.load(configContent)
-      send({
+      duckdbSend({
         type: 'CONFIGURE',
         config: yamlConfig as any,
       })
@@ -23,7 +23,7 @@ export const DuckDbExample = () => {
         setInitProgress(progress)
       }
 
-      send({ type: 'CONNECT', dbProgressHandler: dbProgressHandler })
+      duckdbSend({ type: 'CONNECT', dbProgressHandler: dbProgressHandler, statusHandler: null })
     } catch (error) {
       console.error(error)
     }

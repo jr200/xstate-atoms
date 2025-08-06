@@ -1,17 +1,21 @@
 import React from 'react'
-import { useAtomValue } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import { natsActorAtom, natsSnapshotAtom, prettyPrintXState } from '@jr200/xstate-atoms'
 import yaml from 'js-yaml'
 import configContent from '/nats_basic.yaml.txt?raw'
 
 export const NatsExample = () => {
   const natsActor = useAtomValue(natsActorAtom)
+  const natsSend = useSetAtom(natsActorAtom)
+
   const natsState = useAtomValue(natsSnapshotAtom)
 
   const configure = () => {
     try {
       const yamlConfig = yaml.load(configContent)
-      natsActor.send({
+
+      // showing two different ways to send messages to the machine
+      natsSend({
         type: 'CONFIGURE',
         config: yamlConfig as any,
       })

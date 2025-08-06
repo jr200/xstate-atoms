@@ -1,6 +1,6 @@
 {
   "name": "@jr200/xstate-atoms",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "jr200",
   "description": "Various XState Jotai Atoms...",
   "repository": "https://github.com/jr200/xstate-atoms",
@@ -35,8 +35,8 @@
     "xstate": "^5.20.1"
   },
   "dependencies": {
-    "@jr200/xstate-duckdb": "^0.2.3",
-    "@jr200/xstate-nats": "^0.4.5",
+    "@jr200/xstate-duckdb": "^0.2.4",
+    "@jr200/xstate-nats": "^0.4.6",
     "@js-temporal/polyfill": "^0.5.1",
     "@types/js-yaml": "^4.0.9"
   },
