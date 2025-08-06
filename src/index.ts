@@ -1,4 +1,6 @@
 export * from './duckdb/atoms'
+export * from './duckdb/query'
+
 export * from './nats/atoms'
 export * from './time/atoms'
 

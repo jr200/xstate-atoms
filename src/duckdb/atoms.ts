@@ -20,7 +20,6 @@ export const duckdbCatalogSnapshotAtom = atomWithActorSnapshot(get => {
 })
 duckdbCatalogSnapshotAtom.debugLabel = 'xa.duckdbCatalogSnapshotAtom'
 
-
 export const duckdbCatalogTableDefinitionsAtom = atom(get => get(duckdbCatalogSnapshotAtom).context.tableDefinitions)
 duckdbCatalogTableDefinitionsAtom.debugLabel = 'xa.duckdbCatalogTableDefinitionsAtom'
 
