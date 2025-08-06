@@ -8,7 +8,7 @@ import { TimeConfig, TimeGranularity } from './types'
 const _baseTimeConfigAtom = atom<TimeConfig>({
   offset: 0,
 })
-_baseTimeConfigAtom.debugLabel = 'js._baseTimeConfigAtom'
+_baseTimeConfigAtom.debugLabel = 'xa._baseTimeConfigAtom'
 
 export const timeConfigAtom = atom(
   get => get(_baseTimeConfigAtom),
@@ -19,10 +19,10 @@ export const timeConfigAtom = atom(
     set(_internalStorageAtom, undefined)
   }
 )
-timeConfigAtom.debugLabel = 'js.timeConfigAtom'
+timeConfigAtom.debugLabel = 'xa.timeConfigAtom'
 
 const _internalStorageAtom = atom<number | undefined>(undefined)
-_internalStorageAtom.debugLabel = 'js._internalStorageAtom'
+_internalStorageAtom.debugLabel = 'xa._internalStorageAtom'
 
 export const epochAtom = atom(
   get => {
@@ -34,7 +34,7 @@ export const epochAtom = atom(
     set(_internalStorageAtom, value)
   }
 )
-epochAtom.debugLabel = 'js.epochAtom'
+epochAtom.debugLabel = 'xa.epochAtom'
 
 // --- Atom Family: Per-Granularity Truncated Epoch ---
 export const epochRoundedFamily = atomFamily((granularity?: TimeGranularity) =>
