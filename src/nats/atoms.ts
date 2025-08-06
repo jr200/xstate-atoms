@@ -1,16 +1,28 @@
-import { atomWithMachine } from 'jotai-xstate'
+import { atomWithActor, atomWithActorSnapshot } from 'jotai-xstate'
 import { natsMachine } from '@jr200/xstate-nats'
-import { atom } from 'jotai'
+import { AnyActor } from 'xstate'
 
-// single atom using the nats machine
-export const natsMachineAtom = atomWithMachine(() => natsMachine as any)
-natsMachineAtom.debugLabel = 'js.natsMachineAtom'
+// this pattern/workaround for accessing child states is from:
+// https://github.com/jotaijs/jotai-xstate/issues/11
+export const natsActorAtom = atomWithActor(natsMachine)
+natsActorAtom.debugLabel = 'xa.natsActorAtom'
 
-export const natsConnectionHandleAtom = atom(get => get(natsMachineAtom).context.connection)
-natsConnectionHandleAtom.debugLabel = 'js.natsConnectionHandleAtom'
+export const natsSnapshotAtom = atomWithActorSnapshot(get => {
+  const snapshot = get(natsActorAtom)
+  return snapshot
+})
+natsSnapshotAtom.debugLabel = 'xa.natsSnapshotAtom'
 
-export const natsSubjectMachineAtom = atom(get => get(natsMachineAtom).children.subject)
-natsSubjectMachineAtom.debugLabel = 'js.natsSubjectMachineAtom'
+export const natsSubjectSnapshotAtom = atomWithActorSnapshot(get => {
+  const snapshot = get(natsSnapshotAtom)
+  const child = snapshot.children.subject
+  return child as AnyActor
+})
+natsSubjectSnapshotAtom.debugLabel = 'xa.natsSubjectSnapshotAtom'
 
-export const natsKvMachineAtom = atom(get => get(natsMachineAtom).children.kv)
-natsKvMachineAtom.debugLabel = 'js.natsKvMachineAtom'
+export const natsKvSnapshotAtom = atomWithActorSnapshot(get => {
+  const snapshot = get(natsSnapshotAtom)
+  const child = snapshot.children.kv
+  return child as AnyActor
+})
+natsKvSnapshotAtom.debugLabel = 'xa.natsKvSnapshotAtom'
