@@ -18,8 +18,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "declaration": false,
-    "declarationMap": false,
+    // "declaration": false,
+    // "declarationMap": false,
     "outDir": "./dist",
     "rootDir": "src",
     "esModuleInterop": true,
