@@ -1,6 +1,7 @@
 import { atomWithActor, atomWithActorSnapshot } from 'jotai-xstate'
 import { natsMachine } from '@jr200/xstate-nats'
 import { AnyActor } from 'xstate'
+import { atom } from 'jotai'
 
 // this pattern/workaround for accessing child states is from:
 // https://github.com/jotaijs/jotai-xstate/issues/11
@@ -26,3 +27,6 @@ export const natsKvSnapshotAtom = atomWithActorSnapshot(get => {
   return child as AnyActor
 })
 natsKvSnapshotAtom.debugLabel = 'xa.natsKvSnapshotAtom'
+
+export const natsConnectionHandleAtom = atom(get => get(natsSnapshotAtom).context.connection)
+natsConnectionHandleAtom.debugLabel = 'xa.natsConnectionHandleAtom'

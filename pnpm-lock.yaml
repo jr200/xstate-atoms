@@ -47,17 +47,17 @@ importers:
         version: 2.13.0(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@18.3.23)(react@18.3.1)
       jotai-xstate:
         specifier: ^0.6.1
-        version: 0.6.1(jotai@2.13.0(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@18.3.23)(react@18.3.1))(xstate@5.20.1)
+        version: 0.6.1(jotai@2.13.0(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@18.3.23)(react@18.3.1))(xstate@5.20.2)
       xstate:
         specifier: ^5.20.1
-        version: 5.20.1
+        version: 5.20.2
     devDependencies:
       '@eslint/js':
         specifier: ^9.32.0
         version: 9.32.0
       '@statelyai/inspect':
         specifier: ^0.4.0
-        version: 0.4.0(ws@8.18.3)(xstate@5.20.1)
+        version: 0.4.0(ws@8.18.3)(xstate@5.20.2)
       eslint:
         specifier: ^9.32.0
         version: 9.32.0(jiti@1.21.7)
@@ -93,7 +93,7 @@ importers:
         version: 2.1.0
       xstate:
         specifier: ^5.20.1
-        version: 5.20.1
+        version: 5.20.2
     devDependencies:
       '@apache-arrow/ts':
         specifier: ^21.0.0
@@ -103,7 +103,7 @@ importers:
         version: 9.32.0
       '@statelyai/inspect':
         specifier: ^0.4.0
-        version: 0.4.0(ws@8.18.3)(xstate@5.20.1)
+        version: 0.4.0(ws@8.18.3)(xstate@5.20.2)
       '@types/pako':
         specifier: ^2.0.3
         version: 2.0.3
@@ -142,14 +142,14 @@ importers:
         version: 3.1.0
       xstate:
         specifier: ^5.20.1
-        version: 5.20.1
+        version: 5.20.2
     devDependencies:
       '@eslint/js':
         specifier: ^9.32.0
         version: 9.32.0
       '@statelyai/inspect':
         specifier: ^0.4.0
-        version: 0.4.0(ws@8.18.3)(xstate@5.20.1)
+        version: 0.4.0(ws@8.18.3)(xstate@5.20.2)
       eslint:
         specifier: ^9.32.0
         version: 9.32.0(jiti@1.21.7)
@@ -206,7 +206,7 @@ importers:
         version: 0.12.0(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@18.3.23)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(redux@5.0.1)(storybook@8.6.14(prettier@3.6.2))
       jotai-xstate:
         specifier: ^0.6.1
-        version: 0.6.1(jotai@2.13.0(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@18.3.23)(react@18.3.1))(xstate@5.20.1)
+        version: 0.6.1(jotai@2.13.0(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@18.3.23)(react@18.3.1))(xstate@5.20.2)
       js-yaml:
         specifier: ^4.1.0
         version: 4.1.0
@@ -221,7 +221,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       xstate:
         specifier: ^5.20.1
-        version: 5.20.1
+        version: 5.20.2
     devDependencies:
       '@types/react':
         specifier: ^18.3.3
@@ -2684,8 +2684,8 @@ packages:
       utf-8-validate:
         optional: true
 
-  xstate@5.20.1:
-    resolution: {integrity: sha512-i9ZpNnm/XhCOMUxae1suT8PjYNTStZWbhmuKt4xeTPaYG5TS0Fz0i+Ka5yxoNPpaHW3VW6JIowrwFgSTZONxig==}
+  xstate@5.20.2:
+    resolution: {integrity: sha512-GZmLmc+WPKfFRxuTDAxCg0cUhS/ZnWaRD86DO8MKizeK4a050jd5k7UNnIQ2jJDWRig2/r0tmVXeezUNIhoz5Q==}
 
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
@@ -3240,7 +3240,7 @@ snapshots:
 
   '@sinclair/typebox@0.34.38': {}
 
-  '@statelyai/inspect@0.4.0(ws@8.18.3)(xstate@5.20.1)':
+  '@statelyai/inspect@0.4.0(ws@8.18.3)(xstate@5.20.2)':
     dependencies:
       fast-safe-stringify: 2.1.1
       isomorphic-ws: 5.0.0(ws@8.18.3)
@@ -3248,7 +3248,7 @@ snapshots:
       safe-stable-stringify: 2.5.0
       superjson: 1.13.3
       uuid: 9.0.1
-      xstate: 5.20.1
+      xstate: 5.20.2
     transitivePeerDependencies:
       - ws
 
@@ -4279,10 +4279,10 @@ snapshots:
       - redux
       - storybook
 
-  jotai-xstate@0.6.1(jotai@2.13.0(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@18.3.23)(react@18.3.1))(xstate@5.20.1):
+  jotai-xstate@0.6.1(jotai@2.13.0(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@18.3.23)(react@18.3.1))(xstate@5.20.2):
     dependencies:
       jotai: 2.13.0(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@18.3.23)(react@18.3.1)
-      xstate: 5.20.1
+      xstate: 5.20.2
 
   jotai@2.13.0(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@18.3.23)(react@18.3.1):
     optionalDependencies:
@@ -5126,7 +5126,7 @@ snapshots:
 
   ws@8.18.3: {}
 
-  xstate@5.20.1: {}
+  xstate@5.20.2: {}
 
   yallist@3.1.1: {}
 

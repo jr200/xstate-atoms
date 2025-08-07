@@ -5,33 +5,33 @@ import { truncateTime, toZonedDateTime } from './utils'
 import { TimeConfig, TimeGranularity } from './types'
 
 // --- Config Atom ---
-const _baseTimeConfigAtom = atom<TimeConfig>({
+const baseTimeConfigAtom = atom<TimeConfig>({
   offset: 0,
 })
-_baseTimeConfigAtom.debugLabel = 'xa._baseTimeConfigAtom'
+baseTimeConfigAtom.debugLabel = 'xa.baseTimeConfigAtom'
 
 export const timeConfigAtom = atom(
-  get => get(_baseTimeConfigAtom),
+  get => get(baseTimeConfigAtom),
   (get, set, update: Partial<TimeConfig> | ((prev: TimeConfig) => TimeConfig)) => {
-    const prev = get(_baseTimeConfigAtom)
+    const prev = get(baseTimeConfigAtom)
     const next = typeof update === 'function' ? update(prev) : { ...prev, ...update }
-    set(_baseTimeConfigAtom, next)
-    set(_internalStorageAtom, undefined)
+    set(baseTimeConfigAtom, next)
+    set(internalStorageAtom, undefined)
   }
 )
 timeConfigAtom.debugLabel = 'xa.timeConfigAtom'
 
-const _internalStorageAtom = atom<number | undefined>(undefined)
-_internalStorageAtom.debugLabel = 'xa._internalStorageAtom'
+const internalStorageAtom = atom<number | undefined>(undefined)
+internalStorageAtom.debugLabel = 'xa.internalStorageAtom'
 
 export const epochAtom = atom(
   get => {
     const { offset } = get(timeConfigAtom)
-    const val = get(_internalStorageAtom)
+    const val = get(internalStorageAtom)
     return val !== undefined ? val + offset : undefined
   },
   (_get, set, value: number) => {
-    set(_internalStorageAtom, value)
+    set(internalStorageAtom, value)
   }
 )
 epochAtom.debugLabel = 'xa.epochAtom'
