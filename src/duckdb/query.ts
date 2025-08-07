@@ -115,10 +115,13 @@ export const duckdbQueryFamily = atomFamily(
         }
         const templateParams = get(templateParamsAtom)
 
+        // always hydrate template params
+        // this is to trigger any atoms that are indirectly dependencies of the query
+        const hydratedParams = hydrateTemplateParams(templateParams, get)
+
         let hydratedSql = params.initialParams.sql
         if (typeof hydratedSql === 'function') {
           const sqlTemplate = hydratedSql as any
-          const hydratedParams = hydrateTemplateParams(templateParams, get)
           if (hydratedParams === null || hydratedParams === undefined) {
             return null
           }
