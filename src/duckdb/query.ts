@@ -65,26 +65,31 @@ const hydrateTemplateParams = (templateParams: Record<string, any> | null, get: 
   if (templateParams === undefined || templateParams === null) return null
 
   try {
-    return Object.fromEntries(
-      Object.entries(templateParams).map(([key, value]) => {
-        // Handle falsy values
-        if (value === undefined || value === null) {
-          throw new Error(`Template parameter ${key} is not set`)
-        }
+    const entries = Object.entries(templateParams).map(([key, value]) => {
+      // Handle falsy values
+      if (value === undefined || value === null) {
+        return null
+      }
 
-        // Handle atom values
-        if (isAtom(value)) {
-          const atomValue = get(value)
-          if (!atomValue) {
-            throw new Error(`Template parameter ${key} is not set`)
-          }
-          return [key, atomValue]
+      // Handle atom values
+      if (isAtom(value)) {
+        const atomValue = get(value)
+        if (!atomValue) {
+          return null
         }
+        return [key, atomValue]
+      }
 
-        // Return regular values as-is
-        return [key, value]
-      })
-    )
+      // Return regular values as-is
+      return [key, value]
+    })
+
+    // Check if any entries failed (returned null)
+    if (entries.some(entry => entry === null)) {
+      return null
+    }
+
+    return Object.fromEntries(entries as [string, any][])
   } catch (error) {
     console.error('Error hydrating template params:', error)
     return null
