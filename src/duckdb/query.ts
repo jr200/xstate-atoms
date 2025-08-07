@@ -1,14 +1,15 @@
-import { atom, WritableAtom } from 'jotai'
-import { duckdbActorAtom } from './atoms'
-import { QueryDbParams } from '@jr200/xstate-duckdb'
+import { Atom, atom, Getter, WritableAtom } from 'jotai'
+import { atomFamily } from 'jotai/utils'
+import { duckdbActorAtom, duckdbHandleAtom } from './atoms'
+import { duckdbRunQuery, QueryDbParams } from '@jr200/xstate-duckdb'
 
-export const duckdbQueryAtom = atom(
+export const duckdbExecuteAtom = atom(
   null,
   (
     get,
     set,
     query: {
-      params: QueryDbParams,
+      params: QueryDbParams
       dataAtom: WritableAtom<any, [any], unknown>
     }
   ) => {
@@ -27,12 +28,114 @@ export const duckdbQueryAtom = atom(
           description: description,
           callback: data => {
             set(query.dataAtom, data ?? [])
-          }
-        }
+          },
+        },
       })
     } catch (error) {
       console.error('Error sending query to DuckDB actor:', error)
       return null
     }
+  }
+)
+
+// const duckdbReadOnlyParamsAtom = atom<QueryDbParams | null>(null)
+// export const duckdbReadOnlyAtom = atom(
+//   async get => {
+//     const db = get(duckdbHandleAtom)
+//     const params = get(duckdbReadOnlyParamsAtom)
+//     if (!params || !db) {
+//       return null
+//     }
+
+//     try {
+//       const connection = await db.connect()
+//       const result = await duckdbRunQuery({ ...params, connection })
+//       return result
+//     } catch (error) {
+//       console.error('Error running query:', error)
+//       return null
+//     }
+//   },
+//   (_, set, params: QueryDbParams) => {
+//     set(duckdbReadOnlyParamsAtom, params)
+//   }
+// )
+
+const hydrateTemplateParams = (templateParams: Record<string, any> | null, get: Getter) => {
+  if (templateParams === undefined || templateParams === null) return null
+
+  try {
+    return Object.fromEntries(
+      Object.entries(templateParams).map(([key, value]) => {
+        // Handle falsy values
+        if (value === undefined || value === null) {
+          throw new Error(`Template parameter ${key} is not set`)
+        }
+
+        // Handle atom values
+        if (isAtom(value)) {
+          const atomValue = get(value)
+          if (!atomValue) {
+            throw new Error(`Template parameter ${key} is not set`)
+          }
+          return [key, atomValue]
+        }
+
+        // Return regular values as-is
+        return [key, value]
+      })
+    )
+  } catch (error) {
+    console.error('Error hydrating template params:', error)
+    return null
+  }
+}
+
+const isAtom = (value: any): value is Atom<any> => {
+  return typeof value === 'object' && value !== null && 'read' in value
+}
+
+export const duckdbQueryFamily = atomFamily(
+  (params: { queryId: string; initialParams: QueryDbParams; templateParams?: Record<string, Atom<string>> }) => {
+    // Internal atom to store query parameters for this specific query
+    const queryParamsAtom = atom<QueryDbParams | null>(params.initialParams ?? null)
+    const templateParamsAtom = atom<Record<string, any> | null>(params.templateParams ?? null)
+
+    return atom(
+      async get => {
+        const db = get(duckdbHandleAtom)
+        const queryParams = get(queryParamsAtom)
+        if (!queryParams || !db) {
+          return null
+        }
+        const templateParams = get(templateParamsAtom)
+
+        let hydratedSql = params.initialParams.sql
+        if (typeof hydratedSql === 'function') {
+          const sqlTemplate = hydratedSql as any
+          const hydratedParams = hydrateTemplateParams(templateParams, get)
+          if (hydratedParams === null || hydratedParams === undefined) {
+            return null
+          }
+
+          hydratedSql = sqlTemplate(hydratedParams)
+        }
+
+        const description = params.initialParams?.description ?? params.queryId
+
+        try {
+          const connection = await db.connect()
+          console.log('** running duckdb read-only query', description)
+          const result = await duckdbRunQuery({ ...queryParams, connection, description, sql: hydratedSql })
+          return result
+        } catch (error) {
+          console.error(`Error running query ${params.queryId}:`, error)
+          return null
+        }
+      },
+      (_, set, newParams: QueryDbParams) => {
+        set(queryParamsAtom, newParams)
+      }
+    )
   }
 )
