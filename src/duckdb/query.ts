@@ -1,4 +1,4 @@
-import { Atom, atom, Getter, WritableAtom } from 'jotai'
+import { Atom, atom, Getter, Setter, WritableAtom } from 'jotai'
 import { atomFamily } from 'jotai/utils'
 import { duckdbActorAtom, duckdbHandleAtom } from './atoms'
 import { duckdbRunQuery, QueryDbParams } from '@jr200/xstate-duckdb'
@@ -116,7 +116,7 @@ export const duckdbQueryFamily: AtomFamily<
   const templateParamsAtom = atom<Record<string, any> | null>(params.templateParams ?? null)
 
   return atom(
-    async get => {
+    async (get: Getter) => {
       const db = get(duckdbHandleAtom)
       const queryParams = get(queryParamsAtom)
       if (!queryParams || !db) {
@@ -150,7 +150,7 @@ export const duckdbQueryFamily: AtomFamily<
         return null
       }
     },
-    (_, set, newParams: QueryDbParams) => {
+    (_, set: Setter, newParams: QueryDbParams) => {
       set(queryParamsAtom, newParams)
     }
   )
