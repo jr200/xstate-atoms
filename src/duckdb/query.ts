@@ -104,7 +104,7 @@ const isAtom = (value: any): value is Atom<any> => {
 export type DuckdbQueryFamilyParams = {
   queryId: string
   initialParams: QueryDbParams
-  templateParams?: Record<string, Atom<any>>
+  templateParams?: Record<string, Atom<any> | string | number | boolean>
 }
 
 export const duckdbQueryFamily: AtomFamily<
