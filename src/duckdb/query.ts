@@ -107,51 +107,52 @@ export type DuckdbQueryFamilyParams = {
   templateParams?: Record<string, Atom<any> | string | number | boolean>
 }
 
-export const duckdbQueryFamily: AtomFamily<
+export const duckdbQueryFamily = <T = any>(): AtomFamily<
   DuckdbQueryFamilyParams,
-  WritableAtom<Promise<any>, [newParams: QueryDbParams], void>
-> = atomFamily((params: DuckdbQueryFamilyParams) => {
-  // Internal atom to store query parameters for this specific query
-  const queryParamsAtom = atom<QueryDbParams | null>(params.initialParams ?? null)
-  const templateParamsAtom = atom<Record<string, any> | null>(params.templateParams ?? null)
+  WritableAtom<Promise<T | null>, [newParams: QueryDbParams], void>
+> =>
+  atomFamily((params: DuckdbQueryFamilyParams) => {
+    // Internal atom to store query parameters for this specific query
+    const queryParamsAtom = atom<QueryDbParams | null>(params.initialParams ?? null)
+    const templateParamsAtom = atom<Record<string, any> | null>(params.templateParams ?? null)
 
-  return atom(
-    async get => {
-      const db = get(duckdbHandleAtom)
-      const queryParams = get(queryParamsAtom)
-      if (!queryParams || !db) {
-        return null
-      }
-      const templateParams = get(templateParamsAtom)
-
-      // always hydrate template params
-      // this is to trigger any atoms that are indirectly dependencies of the query
-      const hydratedParams = hydrateTemplateParams(templateParams, get)
-
-      let hydratedSql = params.initialParams.sql
-      if (typeof hydratedSql === 'function') {
-        const sqlTemplate = hydratedSql as any
-        if (hydratedParams === null || hydratedParams === undefined) {
+    return atom(
+      async get => {
+        const db = get(duckdbHandleAtom)
+        const queryParams = get(queryParamsAtom)
+        if (!queryParams || !db) {
           return null
         }
+        const templateParams = get(templateParamsAtom)
 
-        hydratedSql = sqlTemplate(hydratedParams)
+        // always hydrate template params
+        // this is to trigger any atoms that are indirectly dependencies of the query
+        const hydratedParams = hydrateTemplateParams(templateParams, get)
+
+        let hydratedSql = params.initialParams.sql
+        if (typeof hydratedSql === 'function') {
+          const sqlTemplate = hydratedSql as any
+          if (hydratedParams === null || hydratedParams === undefined) {
+            return null
+          }
+
+          hydratedSql = sqlTemplate(hydratedParams)
+        }
+
+        const description = params.initialParams?.description ?? params.queryId
+
+        try {
+          const connection = await db.connect()
+          console.log('** running duckdb read-only query', description)
+          const result = await duckdbRunQuery({ ...queryParams, connection, description, sql: hydratedSql })
+          return result as T
+        } catch (error) {
+          console.error(`Error running query ${params.queryId}:`, error)
+          return null
+        }
+      },
+      (_, set, newParams: QueryDbParams) => {
+        set(queryParamsAtom, newParams)
       }
-
-      const description = params.initialParams?.description ?? params.queryId
-
-      try {
-        const connection = await db.connect()
-        console.log('** running duckdb read-only query', description)
-        const result = await duckdbRunQuery({ ...queryParams, connection, description, sql: hydratedSql })
-        return result
-      } catch (error) {
-        console.error(`Error running query ${params.queryId}:`, error)
-        return null
-      }
-    },
-    (_, set, newParams: QueryDbParams) => {
-      set(queryParamsAtom, newParams)
-    }
-  )
-})
+    )
+  })
